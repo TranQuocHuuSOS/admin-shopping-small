@@ -1,0 +1,79 @@
+.products-container {
+  margin: 20px;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table th,
+.products-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.products-table th {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+.products-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.products-table tr:hover {
+  background-color: #dddddd;
+}
+
+.products-table img {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.loading {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.action-btn {
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+}
+
+.edit-btn {
+  background-color: #4caf50;
+}
+
+.delete-btn {
+  background-color: #f44336; 
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.action-btn.create-btn {
+  background-color: #007bff;
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+
+.action-btn.create-btn:hover {
+  background-color: #0056b3;
+  color: white;
+}

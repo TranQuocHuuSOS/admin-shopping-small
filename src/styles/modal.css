@@ -1,0 +1,68 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .modal-content form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-content label {
+    margin-bottom: 10px;
+  }
+  
+  .modal-content input {
+    margin-top: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .modal-content button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .modal-content button.save-btn {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .modal-content button.close-btn {
+    background: #f44336;
+    color: white;
+  }
+  .action-btn.create-btn {
+    background-color: #007bff;
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  .action-btn.create-btn:hover {
+    background-color: #0056b3;
+    color: white;
+  }

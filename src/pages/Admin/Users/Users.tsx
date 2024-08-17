@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getUsers } from "../../apis/auth";
-import "../../styles/user.css";
+import { getUsers } from "../../../apis/auth";
+import "../../../styles/user.css";
 interface DataUsers {
-  _id:string,
-  fullname : string,
-  email:string,
-  role: 'user',
+  _id: string;
+  fullname: string;
+  email: string;
+  role: "user";
 }
 const Users = () => {
   const [users, setUsers] = useState<DataUsers[]>([]);
@@ -18,7 +18,7 @@ const Users = () => {
         setUsers(userData);
         setLoading(false);
       } catch (err) {
-        console.error("Get users failed",err);
+        console.error("Get users failed", err);
         setLoading(false);
       }
     };
@@ -26,7 +26,7 @@ const Users = () => {
   }, []);
 
   if (loading) return <p className="loading">Loading...</p>;
-  
+
   return (
     <div className="users-container">
       <h1>Users List</h1>
@@ -43,7 +43,7 @@ const Users = () => {
         <tbody>
           {users.map((user, index) => (
             <tr key={user._id}>
-              <td>{index+1}</td>
+              <td>{index + 1}</td>
               <td>{user._id}</td>
               <td>{user.fullname}</td>
               <td>{user.email}</td>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getBooking } from "../../apis/booking";
-import "../../styles/booking.css";
+import { getBooking } from "../../../apis/booking";
+import "../../../styles/booking.css";
 interface DataBooking {
   _id: string;
   user: {
@@ -12,7 +12,7 @@ interface DataBooking {
     _id: string;
     title: string;
     original_price: number;
-    image:string;
+    image: string;
   };
   status: string;
   totalPrice: number;
@@ -47,7 +47,7 @@ const Bookings = () => {
         const bookingData = await getBooking(accessToken);
         console.log("interface", bookingData?.data);
         // console.log(bookingData.data.product.title);
-        
+
         setBookings(bookingData.data);
         setLoading(false);
       } catch (error) {
@@ -81,7 +81,16 @@ const Bookings = () => {
               <td>{index + 1}</td>
               <td>{booking.user.fullname}</td>
               <td>{booking?.product?.title || "No notes"}</td>
-              <td>{booking?.product?.image ? <img src={booking?.product?.image} alt={booking?.product?.image} /> : 'No image'}</td>
+              <td>
+                {booking?.product?.image ? (
+                  <img
+                    src={booking?.product?.image}
+                    alt={booking?.product?.image}
+                  />
+                ) : (
+                  "No image"
+                )}
+              </td>
               <td>{booking.product.original_price}</td>
               <td>{new Date(booking.updatedAt).toLocaleDateString()}</td>
               <td>{booking.paymentDetails.method}</td>

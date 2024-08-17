@@ -15,7 +15,11 @@ const Login: React.FC = () => {
         const data= await loginUser(email, password);
         console.log(data);
         localStorage.setItem('user',JSON.stringify(data.data));
-        navigate('/products');
+        if (data.data.role === 'admin') {
+          navigate('/admin/products');
+        } else {
+          navigate('/home');
+        }
     } catch (error) {
         console.error("There was an error loging the user!", error);
     }

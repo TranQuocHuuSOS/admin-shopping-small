@@ -1,0 +1,13 @@
+.toggle-button{
+    color:blue;
+}
+
+.image{
+    width: 80%;
+    height: 80%;
+}
+.img{
+    width: 100%;
+    align-items: center;
+    margin-left: 2rem;
+}

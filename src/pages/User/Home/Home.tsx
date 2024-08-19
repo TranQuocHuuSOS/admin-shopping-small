@@ -2,21 +2,20 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "../../../apis/product";
 import "../../../styles/home.css";
 import ModalBooking from "../../../components/User/ModalBooking/ModalBooking";
-
+import ProductDescript from "./ProductDescript";
 interface Product {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-    original_price: number;
-    discount_percentage: number;
-    discounted_price: number;
-  }
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  original_price: number;
+  discount_percentage: number;
+  discounted_price: number;
+}
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -26,32 +25,25 @@ const Home = () => {
         console.error("Error fetching products:", error);
       }
     };
-
     fetchProducts();
   }, []);
-  
-  const openModal = (product:Product):void => {
+  const openModal = (product: Product): void => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
-
   const closeModal = () => {
     setSelectedProduct(null);
     setIsModalOpen(false);
   };
-
-  
   const lastProduct = products[products.length - 1];
   return (
     <div className="home-container">
-        <ModalBooking
+      <ModalBooking
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         product={selectedProduct}
       />
-      <h1 className="user-text">
-        Welcome {user.fullname}'s to Ong Tran's Store
-      </h1>
+      <h1 className="user-text">Welcome to Ong Tran's Store</h1>
       {lastProduct && (
         <div
           className="hero-section"
@@ -60,14 +52,25 @@ const Home = () => {
           <div className="overlay">
             <div className="hero-text">
               <h3>{lastProduct.title}</h3>
-              <p>{lastProduct.description}</p>
+
               <div className="pricing">
-                <p className="original-price">${lastProduct.original_price}</p>
+                <p className="original-price">
+                  {lastProduct.original_price.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND"
+                  })}
+                </p>
                 <p className="discount-percentage">
                   -{lastProduct.discount_percentage}%
                 </p>
                 <p className="discounted-price">
-                  ${lastProduct.discounted_price}
+                  {(
+                    lastProduct?.original_price *
+                    (1 - lastProduct?.discount_percentage / 100)
+                  ).toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND"
+                  })}
                 </p>
               </div>
             </div>
@@ -75,22 +78,45 @@ const Home = () => {
         </div>
       )}
       <div className="news-section">
-        <h2>Featured News</h2>
+        <h2 className="feature">Featured News</h2>
         <div className="news-cards">
           {products.map((product, index) => (
-            <div className="card" key={index} onClick={() => openModal(product)}>
+            <div className="card" key={index}>
               <img
                 src={product.image}
                 alt={product.image}
                 className="card-image"
               />
+              {product.discounted_price && (
+                <div className="discount-badge">
+                  {product.discount_percentage}% Off
+                </div>
+              )}
               <div className="card-content">
                 <h3 className="card-title">{product.title}</h3>
-                <p className="card-description">{product.description}</p>
+                <ProductDescript description={product.description} />
+                <div className="price-info">
+                  <span className="original-price">
+                    {product.original_price.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND"
+                    })}
+                  </span>
+                  <span className="discounted-price">
+                    {product.discounted_price.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND"
+                    })}
+                  </span>
+                </div>
               </div>
-              <button  type="button"
-            className="action-btn create-btn"
-            onClick={() => openModal(product)}>Book Now</button>
+              <button
+                type="button"
+                className="action-btn create-btn"
+                onClick={() => openModal(product)}
+              >
+                Book Now
+              </button>
             </div>
           ))}
         </div>

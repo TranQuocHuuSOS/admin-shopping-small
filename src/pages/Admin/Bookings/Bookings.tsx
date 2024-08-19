@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getBooking } from "../../../apis/booking";
+import { changeStatusBooking, getBooking } from "../../../apis/booking";
 import "../../../styles/booking.css";
 interface DataBooking {
   _id: string;
@@ -13,6 +13,8 @@ interface DataBooking {
     title: string;
     original_price: number;
     image: string;
+    discounted_price: number;
+    discount_percentage: number;
   };
   status: string;
   totalPrice: number;
@@ -45,9 +47,6 @@ const Bookings = () => {
       }
       try {
         const bookingData = await getBooking(accessToken);
-        console.log("interface", bookingData?.data);
-        // console.log(bookingData.data.product.title);
-
         setBookings(bookingData.data);
         setLoading(false);
       } catch (error) {
@@ -57,49 +56,102 @@ const Bookings = () => {
     };
     fetchBookings();
   }, []);
+  const handleChangeStatus = async (bookingId: string, status: string) => {
+    try {
+      await changeStatusBooking(bookingId, status);
+      setBookings((prevBookings) =>
+        prevBookings.map((booking) =>
+          booking._id === bookingId ? { ...booking, status: status } : booking
+        )
+      );
+      alert(`Booking status changed to ${status}`);
+    } catch (error) {
+      console.error(`Error changing booking status to ${status}:`, error);
+      alert(`Failed to change booking status to ${status}`);
+    }
+  };
   if (loading) return <p className="loading">Loading...</p>;
   return (
     <div className="bookings-container">
-      <h1>Bookings List</h1>
-      <table className="bookings-table">
-        <thead>
-          <tr>
-            <th>STT</th>
-            <th>Full Name</th>
-            <th>Product Title</th>
-            <th>Image</th>
-            <th>Original Price</th>
-            <th>Time</th>
-            <th>Payment Method</th>
-            <th>Delivery Address</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings?.map((booking, index) => (
-            <tr key={booking._id} className="booking-row">
-              <td>{index + 1}</td>
-              <td>{booking.user.fullname}</td>
-              <td>{booking?.product?.title || "No notes"}</td>
-              <td>
-                {booking?.product?.image ? (
-                  <img
-                    src={booking?.product?.image}
-                    alt={booking?.product?.image}
-                  />
-                ) : (
-                  "No image"
-                )}
-              </td>
-              <td>{booking.product.original_price}</td>
-              <td>{new Date(booking.updatedAt).toLocaleDateString()}</td>
-              <td>{booking.paymentDetails.method}</td>
-              <td>{booking.deliveryAddress}</td>
-              <td>{booking.notes || "No notes"}</td>
+      <h1 className="title">Bookings List</h1>
+      <div className="table-container">
+        <table className="bookings-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Full Name</th>
+              <th>Product Title</th>
+              <th>Image</th>
+              <th>Discounted Price</th>
+              <th>Time</th>
+              <th>Payment Method</th>
+              <th>Delivery Address</th>
+              <th>Notes</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {bookings
+              .slice()
+              .reverse()
+              .map((booking, index) => (
+                <tr key={booking._id} className="booking-row">
+                  <td>{bookings.length - index}</td>
+                  <td>{booking.user.fullname}</td>
+                  <td className="title">
+                    {booking?.product?.title || "No notes"}
+                  </td>
+                  <td>
+                    {booking?.product?.image ? (
+                      <img
+                        src={booking?.product?.image}
+                        alt={booking?.product?.image}
+                      />
+                    ) : (
+                      "No image"
+                    )}
+                  </td>
+                  <td>
+                    {" "}
+                    {(
+                      booking?.product?.original_price *
+                      (1 - booking?.product?.discount_percentage / 100)
+                    ).toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND"
+                    })}
+                  </td>
+                  <td>{new Date(booking.updatedAt).toLocaleDateString()}</td>
+                  <td>{booking.paymentDetails.method}</td>
+                  <td>{booking.deliveryAddress}</td>
+                  <td>{booking.notes || "No notes"}</td>
+                  <td>
+                    {booking.status === "pending" && (
+                      <button
+                        className="confirm-button"
+                        onClick={() =>
+                          handleChangeStatus(booking._id, "confirmed")
+                        }
+                      >
+                        Confirmed
+                      </button>
+                    )}
+                    {booking.status === "confirmed" && (
+                      <button
+                        className="complete-button"
+                        onClick={() =>
+                          handleChangeStatus(booking._id, "completed")
+                        }
+                      >
+                        Completed
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

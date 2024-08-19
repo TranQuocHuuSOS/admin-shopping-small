@@ -1,10 +1,13 @@
 .booking-container {
     padding: 20px;
+    padding-top: 5rem;
+    overflow-x: auto;
   }
   
   .booking-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px;
   }
   
   .booking-table th, .booking-table td {
@@ -13,15 +16,40 @@
   }
   
   .booking-table th {
-    background-color: #f4f4f4;
+    background-color: #FFAEB9;
     text-align: left;
   }
   
   .booking-table tr:nth-child(even) {
     background-color: #f9f9f9;
+    transition: transform 0.3s ease-in-out;
   }
   
   .booking-table tr:hover {
-    background-color: #f1f1f1;
+    background-color: #FFB6C1;
+    transform: scale(1.01); 
   }
-  
+  .booking-table td.title{
+    font-size: 20px;
+  max-width: 250px; 
+  word-wrap: break-word; 
+  white-space: normal;
+   font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    .booking-container{
+      padding-top: 15rem;
+    }
+    .booking-table {
+      min-width: 1000px;
+  }
+  }
+
+  @media (max-width: 480px) {
+    .booking-container{
+      padding-top: 15rem;
+    }
+    .booking-table {
+      min-width: 800px;
+  }
+  }

@@ -10,7 +10,6 @@ interface DataUsers {
 const Users = () => {
   const [users, setUsers] = useState<DataUsers[]>([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -24,34 +23,34 @@ const Users = () => {
     };
     fetchUsers();
   }, []);
-
   if (loading) return <p className="loading">Loading...</p>;
-
   return (
     <div className="users-container">
-      <h1>Users List</h1>
-      <table className="users-table">
-        <thead>
-          <tr>
-            <th>STT</th>
-            <th>ID</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={user._id}>
-              <td>{index + 1}</td>
-              <td>{user._id}</td>
-              <td>{user.fullname}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
+      <h1 className="title">Users List</h1>
+      <div className="table-container">
+        <table className="users-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>ID</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Role</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user._id}>
+                <td>{index + 1}</td>
+                <td>{user._id}</td>
+                <td>{user.fullname}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

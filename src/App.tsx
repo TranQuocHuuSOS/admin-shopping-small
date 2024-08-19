@@ -11,14 +11,14 @@ function App() {
       <div style={{ display: "flex", flexDirection: "column",  height: "100vh" }}>
         <Header />
         {user && user.role === "admin" ? (
-          <div style={{ display: "flex", flex: 1 }}>
+          <div style={{ display: "flex", flex: 1,  }}>
             <Sidebar />
-            <main style={{ padding: "1rem", flex: 1 }}>
+            <main style={{marginLeft:"12%", padding: "1rem", flex: 1 }}>
               <AppRoutes />
             </main>
           </div>
         ) : (
-          <main style={{ padding: "1rem", flex: 1 }}>
+          <main style={{  flex: 1 }}>
             <AppRoutes />
           </main>
         )}

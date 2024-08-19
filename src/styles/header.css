@@ -1,119 +1,243 @@
 /* src/components/Header.css */
+
+/* Default styles for larger screens */
 .header {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FF82AB;
+  border-bottom: 1px solid #ddd;
+  
+}
+
+.headers {
+  display: flex;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  border-bottom: 1px solid #ddd;
+  color: #fff;
+  padding: 0 20px;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+}
+
+.user-sections {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  margin-right: 1rem;
+}
+
+.title-section h1.title {
+  font-size: 1.5rem;
+  color: #8B0A50;
+  margin: 0;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  background-color: #ff259d;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.user-section:hover {
+  background-color: #EE1289;
+}
+
+.avatar {
+  width: 130px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 1rem;
+}
+
+.user-name {
+  margin: 0;
+  font-weight: bold;
+  color: white;
+  font-size: 1rem;
+}
+
+.user-email {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.user-emails {
+  margin: 0.5rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 150px;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.bottom-icon {
+  width: 15px;
+  height: 15px;
+  padding: 1rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.nav-link {
+  color: #8B0A50;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.nav-link:hover {
+  color: #EE1289;
+}
+
+.nav-link.active {
+  color: #EE1289;
+  font-weight: bold;
+  border-bottom: 2px solid #EE1289;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header, .headers {
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .title-section h1.title {
+    font-size: 2rem;
+  }
+
+  .user-section {
+    height: 50px;
+    margin: 5px 0;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 60px;
+  }
+
+  .user-info {
+    padding-right: 0.5rem;
+  }
+  .user-name {
+    font-size: 0.875rem; 
+  }
+  .user-email, .user-emails {
+    font-size: 0.75rem; 
+  }
+  .nav-links {
+    flex-direction: row;
+    margin: 10px 0;
    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #ddd;
   }
-  .headers {
-   
-    display: flex;
-    height: 40px;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000000;
-    border-bottom: 1px solid #ddd;
+
+  .nav-link {
+    font-size: 1.5;
+    padding: 8px;
   }
-  .title-section {
-    display: flex;
+}
+
+@media (max-width: 480px) {
+  .header, .headers {
+    padding: 10px;
     align-items: center;
   }
-  .user-sections {
-    display: flex;
-    align-items: center;
-    margin-left: 2rem;
+  .user-name {
+    font-size: 1rem; 
+  }
+
+  .user-email, .user-emails {
+    font-size: 0.625rem; 
   }
   .icon {
     width: 80px;
     height: 80px;
-    margin-right: 1rem;
-  }
-  
-  .title {
-    font-size: 1.5rem;
-    margin: 0;
-  }
-  
-  .user-section {
-    display: flex;
-    align-items: center;
-  }
-  
-  .avatar {
-    width: 130px;
-    height: 80px;
-    border-radius: 50%;
-   
-  }
-  
-  .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding-right: 1rem;
-  }
-  
-  .user-name {
-    margin: 0;
-    font-weight: bold;
-  }
-  
-  .user-email {
-    margin: 0;
-    font-size: 0.875rem;
-    color: #666;
-  }
-  .user-emails {
-    margin: 0.5rem;
-    font-size: 0.875rem;
-    color: #666;
-  }
-  .dropdown {
-    position: absolute;
-    top: 60px; 
-    right: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    width: 150px;
-    z-index: 1000;
-  }
-  
-  .dropdown-item {
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    justify-content: center;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .dropdown-icon {
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
-  }
-  .bottom-icon {
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
   }
 
-  .nav-links {
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
+  .title-section h1.title{
+    font-size: 2rem;
   }
-  
+
+  .user-section {
+    height: 40px;
+    margin: 5px 0;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 50px;
+  }
+
+  .user-info {
+    padding-right: 0;
+  }
+
   .nav-link {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
+    font-size: 1.5rem;
+    padding: 5px;
   }
+}

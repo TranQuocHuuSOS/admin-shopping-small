@@ -3,6 +3,7 @@ import { deleteProduct, getProducts } from "../../../apis/product";
 import "../../../styles/product.css";
 import ProductModal from "./ProductModal";
 import NewProductModal from "./NewProductModal";
+import ProductDescription from "./ProductDescription";
 interface DataProducts {
   _id: string;
   title: string;
@@ -26,7 +27,6 @@ const Products = () => {
   const fetchProducts = async () => {
     try {
       const productData = await getProducts();
-      console.log("interface", productData);
       setProducts(productData.data);
       setLoading(false);
     } catch (err) {
@@ -68,60 +68,82 @@ const Products = () => {
   return (
     <div className="products-container">
       <div className="header-row">
-        <h1>Products List</h1>
-        <div>
+        <h1 className="title">Products List</h1>
+        <div className="addNewProduct">
           <button onClick={handleCreate} className="action-btn create-btn">
             Create New Product
           </button>
         </div>
       </div>
-      <table className="products-table">
-        <thead>
-          <tr>
-            <th>STT</th>
-            <th>Title</th>
-            <th>Original Price</th>
-            <th>Discount Percentage</th>
-            <th>Discounted Price</th>
-            <th>Description</th>
-            <th>Image</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product, index) => (
-            <tr key={product._id}>
-              <td>{index + 1}</td>
-              <td>{product.title || "N/A"}</td>
-              <td>{product.original_price || 0}</td>
-              <td>{product.discount_percentage || 0}</td>
-              <td>{product.discounted_price || 0}</td>
-              <td>{product.description || "No description"}</td>
-              <td>
-                {product.image ? (
-                  <img src={product.image} alt={product.title} />
-                ) : (
-                  "No image"
-                )}
-              </td>
-              <td>
-                <button
-                  onClick={() => handleEdit(product._id)}
-                  className="action-btn edit-btn"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(product._id)}
-                  className="action-btn delete-btn"
-                >
-                  Delete
-                </button>
-              </td>
+      <div className="table-container">
+        <table className="products-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Title</th>
+              <th>Original Price</th>
+              <th>Discount Percentage</th>
+              <th>Discounted Price</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products
+              .slice()
+              .reverse()
+              .map((product, index) => (
+                <tr key={product._id}>
+                  <td>{products.length - index}</td>
+                  <td className="title">{product.title || "N/A"}</td>
+                  <td>
+                    {product.original_price.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND"
+                    }) || 0}
+                  </td>
+                  <td>{product.discount_percentage || 0} %</td>
+                  <td>
+                    {" "}
+                    {(
+                      product?.original_price *
+                      (1 - product?.discount_percentage / 100)
+                    ).toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND"
+                    })}
+                  </td>
+                  <ProductDescription
+                    description={product.description}
+                    image={""}
+                  />
+                  <td>
+                    {product.image ? (
+                      <img src={product.image} alt={product.title} />
+                    ) : (
+                      "No image"
+                    )}
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleEdit(product._id)}
+                      className="action-btn edit-btn"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(product._id)}
+                      className="action-btn delete-btn"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
       <ProductModal
         isOpen={isModalOpen}
         product={selectedProduct}

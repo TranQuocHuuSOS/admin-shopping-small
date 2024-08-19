@@ -16,7 +16,6 @@ interface ProductModalProps {
   onClose: () => void;
   onSave: () => void;
 }
-
 const ProductModal: React.FC<ProductModalProps> = ({
   isOpen,
   product,
@@ -28,9 +27,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
     description: "",
     discount_percentage: 0,
     original_price: 0,
-    discounted_price: 0
+    discounted_price: 0,
+    image: ""
   });
-
   useEffect(() => {
     if (product) {
       setFormData({
@@ -38,16 +37,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
         description: product.description,
         discount_percentage: product.discount_percentage,
         original_price: product.original_price,
-        discounted_price: product.discounted_price
+        discounted_price: product.discounted_price,
+        image: product.image
       });
     }
   }, [product]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
   const handleSubmit = async () => {
     if (
       product &&
@@ -109,6 +107,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
               type="number"
               name="discounted_price"
               value={formData.discounted_price}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Product Image:
+            <input
+              type="text"
+              name="image"
+              value={formData.image}
               onChange={handleChange}
             />
           </label>

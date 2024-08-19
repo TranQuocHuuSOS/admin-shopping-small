@@ -1,6 +1,7 @@
 .users-container {
     width: 100%;
     box-sizing: border-box;
+    padding-top: 3rem;
   }
   
   .users-table {
@@ -17,7 +18,7 @@
   }
   
   .users-table th {
-    background-color: #f4f4f4;
+    background-color: #FFAEB9;
     color: #333;
     font-weight: bold;
   }
@@ -36,4 +37,7 @@
     font-size: 18px;
     color: #333;
   }
-  
+  .table-container {
+    max-height: 500px; 
+    overflow-y: auto;
+  }

@@ -20,8 +20,6 @@ export const createBooking = async (
   deliveryAddress: string,
   notes: string
 ) => {
-    console.log("đẩy thông tin booking", user,product,deliveryAddress ,notes);
-    
   try {
     const response = await axios.post(`${API_URL}/booking/create`, {
       user,
@@ -36,19 +34,32 @@ export const createBooking = async (
   }
 };
 
-
-
-export const getUserBookings = async (accessToken:string) => {
-    try {
-        const response = await axios.get(`${API_URL}/booking/getByUserId`, {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`
-          }
-        });
-        
-        return response.data;
-      } catch (error) {
-        console.error("Error fetching user bookings:", error);
-        throw error;
+export const getUserBookings = async (accessToken: string) => {
+  try {
+    const response = await axios.get(`${API_URL}/booking/getByUserId`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
       }
-}
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user bookings:", error);
+    throw error;
+  }
+};
+
+export const changeStatusBooking = async (
+  bookingId: string,
+  status: string
+) => {
+  try {
+    const response = await axios.put(`${API_URL}/booking/changeStatus`, {
+      bookingId,
+      status
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error change status bookings:", error);
+    throw error;
+  }
+};

@@ -1,12 +1,12 @@
-import React from 'react'
-import {  Link ,useLocation} from "react-router-dom";
-import "../../styles/sidebar.css"
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import "../../styles/sidebar.css";
 const Sidebar = () => {
   const location = useLocation();
   return (
     <aside className="sidebar">
-    <nav>
-    <h2 className="sidebar-title">Management</h2>
+      <nav>
+        <h2 className="sidebar-title">Management</h2>
         <ul>
           <li className={location.pathname === "/products" ? "active" : ""}>
             <Link to="/products">Products</Link>
@@ -18,9 +18,9 @@ const Sidebar = () => {
             <Link to="/users">Users</Link>
           </li>
         </ul>
-    </nav>
-  </aside>
-  )
-}
+      </nav>
+    </aside>
+  );
+};
 
-export default Sidebar
+export default Sidebar;

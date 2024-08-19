@@ -48,3 +48,36 @@ export default tseslint.config({
   },
 })
 ```
+
+** Project Name: Shopping Small**
+
+1. **Clone the Repository for admin and client**
+  git clone git@github.com:TranQuocHuuSOS/admin-shopping-small.git
+
+2. **Install Dependencies**
+  npm install
+
+3. **Run the Application**
+  npm run dev
+
+**Explanation of Key Directories and Files (React)**
+
+components/: This directory contains the React components used in the application. Each component is responsible for rendering a specific part of the UI.
+
+pages/: This directory contains the main page components for the application.
+Home.js: The home page of the application.
+Booking.js: The page for managing bookings.
+
+apis: : This directory contains the services for making HTTP requests to the backend API.
+
+App.js: The main App component that sets up the routing and provides the main structure of the application.
+
+index.js: The entry point of the React application. It renders the App component into the DOM.
+
+styles/: This directory contains the global CSS styles for the application.
+
+**Assumptions:**
+Users have valid API keys and credentials for external services.
+MongoDB is used as the database for the backend.
+The project uses environment variables to manage sensitive information and configuration.
+The frontend and backend are served on different ports during development.

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../../../styles/userBookings.css";
 import { changeStatusBooking, getUserBookings } from "../../../apis/booking";
 import ProductDescription from "../../Admin/Products/ProductDescription";

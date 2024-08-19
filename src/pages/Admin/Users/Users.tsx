@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getUsers } from "../../../apis/auth";
 import "../../../styles/user.css";
 interface DataUsers {

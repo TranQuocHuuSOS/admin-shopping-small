@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { deleteProduct, getProducts } from "../../../apis/product";
 import "../../../styles/product.css";
 import ProductModal from "./ProductModal";

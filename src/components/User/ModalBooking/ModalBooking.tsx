@@ -5,11 +5,11 @@ import ProductDescript from "../../../pages/User/Home/ProductDescript";
 interface ModalBookingProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  product: Product | null;
+  product: Products | null;
 }
 
-interface Product {
-  _id: number;
+interface Products {
+  _id: string;
   title: string;
   description: string;
   image: string;

@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:5000";
+const API_URL = "https://shopping-mall-server.onrender.com";
 export const getBooking = async (accessToken: string) => {
   try {
     const response = await axios.get(`${API_URL}/booking/getAll`, {

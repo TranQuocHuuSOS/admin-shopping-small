@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import "../styles/header.css";
 import { logoutUser } from "../apis/auth";
 import { useNavigate, Link, useLocation } from "react-router-dom";

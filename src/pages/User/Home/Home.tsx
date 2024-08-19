@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getProducts } from "../../../apis/product";
 import "../../../styles/home.css";
 import ModalBooking from "../../../components/User/ModalBooking/ModalBooking";
 import ProductDescript from "./ProductDescript";
 interface Product {
-  id: number;
+  _id: string;
   title: string;
   description: string;
   image: string;

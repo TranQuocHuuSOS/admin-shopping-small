@@ -7,6 +7,7 @@ interface User {
   email: string;
   role: string;
 }
+
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
